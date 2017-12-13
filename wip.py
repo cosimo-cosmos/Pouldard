@@ -1,4 +1,4 @@
-import os
+import os,sys
 import glob
 import shutil
 import re
@@ -39,26 +39,34 @@ print(ordered_files)
 
 
 
+pattern = re.compile(r"(\b[A-Z].+?\b)+?\s??[Cc]opyright")
 
-
-
-
-
-
-pattern = re.compile ('(([A-Z]\w+)\s?)+(.?|.+)\s[Cc]opyright')
-#pattern = re.compile('[Cc]opyright')
 os.chdir(new_path)
+logging = 'C:\TEMP\log_file.txt'
+if os.path.isfile(logging):
+    os.remove(logging)
 for i, input in tqdm(enumerate((os.listdir('.')))):
     try:
         with open(str(input),'r',encoding='utf-8')as f:
             contents = f.read()
             match = pattern.search(contents)
 
-            print('{} --> {}'.format(match.group(0), i))
+
+
+            with open(logging, 'a') as log:
+                log_file = log.write('{} --> {}'.format(match.group(0), i) + '\n')
+
+
+            print('{} --> {}'.format(match.group(), i))
+
+
     except AttributeError:
         print('{} --> where hide the error'.format(i))
-        continue
+        #continue
 
+    #finally:
+        #(sys.exit(0))
+print('THE END')
 
 #TODO USE GLOB FOR IMPORT AND CHANGE LOOK UP FOLDER WARNING PRESENTLY ITS SET TO CURRENT ('.') ligne 19
 
