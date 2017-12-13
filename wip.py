@@ -53,7 +53,7 @@ for i, input in tqdm(enumerate((os.listdir('.')))):
 
 
 
-            with open(logging, 'a') as log:
+            with open(logging, 'a', encoding='utf8') as log:
                 log_file = log.write('{} --> {}'.format(match.group(0), i) + '\n')
 
 
