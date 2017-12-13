@@ -39,8 +39,9 @@ print(ordered_files)
 
 
 
-pattern = re.compile(r"(?P<title>(\b[A-Z].+?\b)+?\s??)(?P<cop>[Cc]opyright)")
-
+#pattern = re.compile(r"(?P<title>(\b[A-Z].+?\b)+?\s??)(?P<cop>[Cc]opyright)")
+#pattern with 'Python' keyword
+pattern = re.compile(r'(\b[A-Z].+?\b)+?\s??Python')
 os.chdir(new_path)
 logging = 'C:\TEMP\log_file.txt'
 if os.path.isfile(logging):
@@ -54,10 +55,10 @@ for i, input in tqdm(enumerate((os.listdir('.')))):
 
 
             with open(logging, 'a', encoding='utf8') as log:
-                log_file = log.write('{} --> {}'.format(match.group('title'), i) + '\n')
+                log_file = log.write('{} --> {}'.format(match.group(), i) + '\n')
 
 
-            print('{} --> {}'.format(match.group('title'), i))
+            print('{} --> {}'.format(match.group(), i))
 
 
     except AttributeError:
