@@ -39,9 +39,11 @@ print(ordered_files)
 
 
 
-#pattern = re.compile(r"(?P<title>(\b[A-Z].+?\b)+?\s??)(?P<cop>[Cc]opyright)")
+pattern = re.compile(r"(?P<title>(\b[A-Z].+?\b)+?\s??)(?P<cop>[Cc]opyright)")
 #pattern with 'Python' keyword
-pattern = re.compile(r'(\b[A-Z].+?\b)+?\s??Python')
+#pattern = re.compile(r'(\b[A-Z].+?\b)+?\s??Python|[Cc]opyright')
+#pattern = re.compile(r'(\b[A-Z].+?\b)+?\s??Python')
+
 os.chdir(new_path)
 logging = 'C:\TEMP\log_file.txt'
 if os.path.isfile(logging):
