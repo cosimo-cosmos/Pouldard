@@ -1,4 +1,5 @@
 import os
+from collections import deque
 from wand.image import Image
 from PIL import Image as PI
 import pyocr
@@ -38,6 +39,7 @@ for j, file in enumerate(os.listdir(test_dir)):
 
 
     #OCR PDF and return str i/O(put into docstring at the end)
+
 for j, file in enumerate(os.listdir(Input_dir)):
     input_file = str(os.path.join(os.path.abspath(Input_dir), file))
 
@@ -70,5 +72,6 @@ for j, file in enumerate(os.listdir(Input_dir)):
             #return
 
     extract_text(input_file)
+
 
 
