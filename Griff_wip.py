@@ -1,7 +1,6 @@
-import os
+import os, sys
 from datetime import datetime
-from collections import deque
-import itertools
+import re
 from multiprocessing import Pool
 from wand.image import Image
 from PIL import Image as PI
@@ -39,9 +38,10 @@ for j, file in enumerate(os.listdir(test_dir)):
 """
 def get_pdf_paths(folder):
     return(os.path.join(folder, file)
-        for file in os.listdir(folder))
+        for file in sorted(os.listdir(folder), key = lambda x: (int(re.sub('\D','',x)),x)))
 
-pdf_files = get_pdf_paths(Input_dir_temp)
+
+#pdf_files = get_pdf_paths(Input_dir)
 
 #OCR PDF and return str i/O(put into docstring at the end)
 def extract_text(input_pdf):
@@ -69,7 +69,7 @@ def extract_text(input_pdf):
         final_text.append(txt)
 
 
-    with open(Ouput_dir + 'output{0:%H_%M_%S}.txt'.format(datetime.now()), 'w', encoding='utf-8') as f:
+    with open(Ouput_dir + 'output{0:%H_%M_%S.%f}.txt'.format(datetime.now()), 'w', encoding='utf-8') as f:
 
         for item in final_text:
             f.write(item)
@@ -92,22 +92,23 @@ p.join()
 """
 
 
-#ordered_files = sorted(files, key=lambda x: (int(re.sub('\D','',x)),x))
+
 
 
 
 if __name__=='__main__':
     pdf_files = get_pdf_paths(Input_dir)
+    sys.stdout = open('C:\TEMP\Pouldard\Input_as_coming_list.txt','w')
 
     p = Pool()
-
-    p.map(extract_text, pdf_files)
+    for fn in p.imap_unordered(extract_text, pdf_files):
+        print(fn)
+    #p.map(extract_text, pdf_files)
     p.close()
     p.join()
-"""
-    for fn in p.imap_unordered(extract_text, pdf_files):
-        print("completed file:", fn)
-"""
+
+
+
 
 
 
