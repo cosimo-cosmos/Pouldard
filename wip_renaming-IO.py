@@ -34,9 +34,10 @@ print(Paths_joined)
 
 
 
-
+"""
 for a,b in zip (get_pdf_paths(Output_dir), Paths_joined):
     os.rename(a, b)
+"""
 
 
 

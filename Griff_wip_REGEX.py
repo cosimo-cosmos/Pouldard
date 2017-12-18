@@ -33,23 +33,34 @@ os.chdir(Output_dir)
 logging = 'C:\TEMP\Pouldard\log_file.txt'
 if os.path.isfile(logging):
     os.remove(logging)
+re_list = []
 for i, output in enumerate(sorted(os.listdir('.'), key=lambda x: (int(re.sub('\D','',x)),x))):
     try:
         with open(str(output),'r',encoding='utf-8')as f:
             contents = f.read()
             match = pattern.search(contents)
+            re_list.append("{}_{}".format(i, match.group()))
 
 
+           # with open(logging, 'a', encoding='utf8') as log:
+                #log_file = log.write('{1}_{0}'.format(match.group().strip(), i) +'\n')
 
-            with open(logging, 'a', encoding='utf8') as log:
-                log_file = log.write('{} --> {}'.format(match.group(), i) + '\n')
 
+            #print('{} --> {}'.format(match.group(),i))
 
-            print('{} --> {}'.format(match.group(), i))
 
 
     except AttributeError:
-        print('{} --> where hide the error'.format(i))
+        re_list.append('{}_untitled'.format(i))
+
+
+"""
+        with open(logging, 'a', encoding='utf8') as log:
+            log_file = log.write('{}_untitled'.format(i) + '\n')
+            
+"""
+        #print('{} --> where hide the error'.format(i))
+print(re_list)
 
 print('THE END')
 
