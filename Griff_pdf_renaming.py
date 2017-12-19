@@ -1,6 +1,6 @@
 import os
 import regex as re
-import Pouldard.Griff_wip_REGEX as griff
+from Pouldard.Griff_wip_REGEX import re_list
 Pdf_to_rename_dir = r"C:\TEMP\Pouldard\pdf_to_rename_dir"
 
 def get_pdf_paths(folder):
@@ -8,7 +8,7 @@ def get_pdf_paths(folder):
         for file in os.listdir(folder))
 
 new_re_list = []
-for item in griff.re_list:
+for item in re_list:
        new_item = re.sub(r"\n"," ", item).strip() +".pdf"
        new_re_list.append(new_item)
 
@@ -26,6 +26,7 @@ print(Paths_joined)
 
 for a,b in zip (get_pdf_paths(Pdf_to_rename_dir), Paths_joined):
     os.rename(a, b)
+
 
 
 
